@@ -17,7 +17,7 @@ class Neo4jMCPServer {
   constructor() {
     this.server = new Server(
       {
-        name: "neo4j-mcp-server",
+        name: "neo4j-mcp-readonly",
         version: "1.0.0",
       }
     );

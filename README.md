@@ -1,6 +1,6 @@
 # Neo4j MCP Server
 
-[![npm version](https://badge.fury.io/js/neo4j-mcp-server.svg)](https://badge.fury.io/js/neo4j-mcp-server)
+[![npm version](https://badge.fury.io/js/neo4j-mcp-readonly.svg)](https://badge.fury.io/js/neo4j-mcp-readonly)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -12,20 +12,20 @@ A Model Context Protocol (MCP) server that provides **read-only** access to your
 
 ```bash
 # Install globally
-npm install -g neo4j-mcp-server
+npm install -g neo4j-mcp-readonly
 
 # Or use with npx (no installation required)
-npx neo4j-mcp-server --help
+npx neo4j-mcp-readonly --help
 ```
 
 ### Basic Usage
 
 ```bash
 # Start with command line arguments
-neo4j-mcp-server --neo4j-uri bolt://localhost:7687 --neo4j-username neo4j --neo4j-password mypassword
+neo4j-mcp-readonly --neo4j-uri bolt://localhost:7687 --neo4j-username neo4j --neo4j-password mypassword
 
 # Or use environment variables
-NEO4J_URI=bolt://localhost:7687 NEO4J_USERNAME=neo4j NEO4J_PASSWORD=mypassword neo4j-mcp-server
+NEO4J_URI=bolt://localhost:7687 NEO4J_USERNAME=neo4j NEO4J_PASSWORD=mypassword neo4j-mcp-readonly
 ```
 
 ## 📋 Features
@@ -44,7 +44,7 @@ NEO4J_URI=bolt://localhost:7687 NEO4J_USERNAME=neo4j NEO4J_PASSWORD=mypassword n
 ### Method 1: Command Line Arguments
 
 ```bash
-neo4j-mcp-server \
+neo4j-mcp-readonly \
   --neo4j-uri bolt://localhost:7687 \
   --neo4j-username neo4j \
   --neo4j-password your_password
@@ -56,7 +56,7 @@ neo4j-mcp-server \
 export NEO4J_URI=bolt://localhost:7687
 export NEO4J_USERNAME=neo4j
 export NEO4J_PASSWORD=your_password
-neo4j-mcp-server
+neo4j-mcp-readonly
 ```
 
 ### Method 3: Mixed Approach
@@ -64,7 +64,7 @@ neo4j-mcp-server
 ```bash
 # Environment for sensitive data, CLI for the rest
 export NEO4J_PASSWORD=your_secure_password
-neo4j-mcp-server --neo4j-uri bolt://myserver:7687 --neo4j-username myuser
+neo4j-mcp-readonly --neo4j-uri bolt://myserver:7687 --neo4j-username myuser
 ```
 
 ## 🎯 Usage with Cursor IDE
@@ -79,7 +79,7 @@ Add this to your Cursor MCP settings:
     "neo4j": {
       "command": "npx",
       "args": [
-        "neo4j-mcp-server",
+        "neo4j-mcp-readonly",
         "--neo4j-uri", "bolt://localhost:7687",
         "--neo4j-username", "neo4j",
         "--neo4j-password", "your_password_here"
@@ -96,7 +96,7 @@ Add this to your Cursor MCP settings:
   "mcpServers": {
     "neo4j": {
       "command": "npx",
-      "args": ["neo4j-mcp-server"],
+      "args": ["neo4j-mcp-readonly"],
       "env": {
         "NEO4J_URI": "bolt://localhost:7687",
         "NEO4J_USERNAME": "neo4j",
@@ -107,11 +107,28 @@ Add this to your Cursor MCP settings:
 }
 ```
 
+### Option 3: Minimal Setup (Password Only)
+
+For simple local setups where you only need to specify the password:
+
+```json
+{
+  "mcpServers": {
+    "neo4j": {
+      "command": "npx",
+      "args": ["neo4j-mcp-readonly", "--neo4j-password", "your_password_here"]
+    }
+  }
+}
+```
+
+This assumes default values: `bolt://localhost:7687` and username `neo4j`.
+
 ### Configuration Steps
 
 1. **Install the package** (if not using npx):
    ```bash
-   npm install -g neo4j-mcp-server
+   npm install -g neo4j-mcp-readonly
    ```
 
 2. **Add MCP server to Cursor**:
@@ -211,7 +228,7 @@ cp examples/docker-compose.yml .
 docker-compose up -d
 
 # Connect with MCP server
-neo4j-mcp-server --neo4j-password your_password_here
+neo4j-mcp-readonly --neo4j-password your_password_here
 ```
 
 ## 🔧 Development
@@ -219,8 +236,8 @@ neo4j-mcp-server --neo4j-password your_password_here
 ### Local Development
 
 ```bash
-git clone https://github.com/your-username/neo4j-mcp-server.git
-cd neo4j-mcp-server
+git clone https://github.com/ThisIsVoid/neo4j-mcp-readonly.git
+cd neo4j-mcp-readonly
 npm install
 npm run build
 npm run dev
@@ -236,10 +253,10 @@ npm run build
 
 ```bash
 # Test connection
-neo4j-mcp-server --help
+neo4j-mcp-readonly --help
 
 # Test with your database
-NEO4J_PASSWORD=test neo4j-mcp-server
+NEO4J_PASSWORD=test neo4j-mcp-readonly
 ```
 
 ## 📚 Advanced Configuration
@@ -248,19 +265,19 @@ NEO4J_PASSWORD=test neo4j-mcp-server
 
 ```bash
 # Neo4j Aura
-neo4j-mcp-server \
+neo4j-mcp-readonly \
   --neo4j-uri neo4j+s://xxxx.databases.neo4j.io \
   --neo4j-username neo4j \
   --neo4j-password your_aura_password
 
 # Neo4j Enterprise with custom port
-neo4j-mcp-server \
+neo4j-mcp-readonly \
   --neo4j-uri bolt://enterprise-server:7687 \
   --neo4j-username readonly_user \
   --neo4j-password readonly_password
 
 # Local Neo4j with custom database
-neo4j-mcp-server \
+neo4j-mcp-readonly \
   --neo4j-uri bolt://localhost:7687/movies \
   --neo4j-username neo4j \
   --neo4j-password mypassword
@@ -279,7 +296,7 @@ NEO4J_PASSWORD=your_secure_password
 Then run:
 ```bash
 source .env
-neo4j-mcp-server
+neo4j-mcp-readonly
 ```
 
 ## 🚨 Troubleshooting
@@ -320,7 +337,7 @@ neo4j-mcp-server
 ### MCP Issues
 
 1. **Server not found in Cursor**:
-   - Verify npx can find the package: `npx neo4j-mcp-server --help`
+   - Verify npx can find the package: `npx neo4j-mcp-readonly --help`
    - Check Cursor MCP configuration syntax
    - Restart Cursor after configuration changes
 
@@ -384,8 +401,8 @@ If this project helps you, please consider giving it a star on GitHub!
 
 ## 📞 Support
 
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/your-username/neo4j-mcp-server/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/your-username/neo4j-mcp-server/discussions)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/ThisIsVoid/neo4j-mcp-readonly/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/ThisIsVoid/neo4j-mcp-readonly/discussions)
 - 📖 **Documentation**: This README and inline code comments
 - 🎯 **Examples**: Check the `/examples` directory
 
