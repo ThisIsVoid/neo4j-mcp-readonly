@@ -1,6 +1,6 @@
 {
   "name": "neo4j-mcp-readonly",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Model Context Protocol server for read-only Neo4j database queries. Connect your Neo4j database to Cursor IDE safely.",
   "main": "dist/index.js",
   "type": "module",
