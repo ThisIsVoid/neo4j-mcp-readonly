@@ -1,0 +1,67 @@
+{
+  "name": "neo4j-mcp-readonly",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for read-only Neo4j database queries. Connect your Neo4j database to Cursor IDE safely.",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "neo4j-mcp-readonly": "dist/index.js"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "examples/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "prepublishOnly": "npm run build",
+    "postbuild": "chmod +x dist/index.js",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "mcp",
+    "neo4j",
+    "database",
+    "cursor",
+    "model-context-protocol",
+    "graph-database",
+    "cypher",
+    "read-only",
+    "ai",
+    "code-assistant",
+    "ide",
+    "bolt"
+  ],
+  "author": {
+    "name": "Mr Void",
+    "email": "mrvoid433@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThisIsVoid/neo4j-mcp-readonly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ThisIsVoid/neo4j-mcp-readonly/issues"
+  },
+  "homepage": "https://github.com/ThisIsVoid/neo4j-mcp-readonly#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "neo4j-driver": "^5.15.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  }
+}

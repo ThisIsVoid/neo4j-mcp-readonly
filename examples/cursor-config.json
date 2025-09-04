@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "neo4j": {
+      "command": "npx",
+      "args": [
+        "neo4j-mcp-readonly",
+        "--neo4j-uri", "bolt://localhost:7687",
+        "--neo4j-username", "neo4j",
+        "--neo4j-password", "your_password_here"
+      ]
+    }
+  }
+}
